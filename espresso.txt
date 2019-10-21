@@ -1,0 +1,203 @@
+arzirk@lx17:~> espresso 
+.i 3
+.o 2
+000 11
+001 01
+010 11
+011 00
+100 01
+101 10
+110 01
+111 10
+.e
+.i 3
+.o 2
+.p 4
+1-1 10
+00- 01
+0-0 10
+--0 01
+.e
+arzirk@lx17:~> espresso -Dopoall
+.i 3
+.o 2
+000 11
+001 01
+010 11
+011 00
+100 01
+101 10
+110 01
+111 10
+.e
+# phase is --- 00
+# ESPRESSO  	Time was 0.00 sec, cost is c=4(0) in=8 out=4 tot=12
+# phase is --- 01
+# ESPRESSO  	Time was 0.00 sec, cost is c=4(0) in=7 out=4 tot=11
+# phase is --- 10
+# ESPRESSO  	Time was 0.00 sec, cost is c=3(0) in=6 out=4 tot=10
+# phase is --- 11
+# ESPRESSO  	Time was 0.00 sec, cost is c=4(0) in=7 out=4 tot=11
+# opoall	Time was 0.00 sec, cost is c=3(0) in=6 out=4 tot=10
+.i 3
+.o 2
+#.phase 10
+.p 3
+0-0 10
+-11 01
+1-1 11
+.e
+arzirk@lx17:~>
+
+
+arzirk@lx17:~> espresso
+.i 3
+.o 2
+.phase 10
+000 11
+001 01
+010 11
+011 00
+100 01
+101 10
+110 01
+111 10
+.e
+.i 3
+.o 2
+#.phase 10
+.p 3
+0-0 10
+-11 01
+1-1 11
+.e
+arzirk@lx17:~> espresso
+^C
+arzirk@lx17:~> espresso -Doppoall
+espresso: bad subcommand "oppoall"
+arzirk@lx17:~> espresso -Dopoall
+.i 4
+.o 4
+0000 1-00
+0001 01-0
+0010 11-1
+0011 0-01
+0100 1110
+0101 1010
+0110 -111
+0111 01-0
+1000 0011
+1001 -10-
+1010 -0-1
+1011 1001
+1100 11-0
+1101 0-10
+1110 -000
+1111 1011
+.e
+# phase is ---- 0000
+# ESPRESSO  	Time was 0.00 sec, cost is c=10(0) in=28 out=14 tot=42
+# phase is ---- 0001
+# ESPRESSO  	Time was 0.00 sec, cost is c=10(0) in=29 out=16 tot=45
+# phase is ---- 0010
+# ESPRESSO  	Time was 0.00 sec, cost is c=11(0) in=29 out=14 tot=43
+# phase is ---- 0011
+# ESPRESSO  	Time was 0.00 sec, cost is c=10(0) in=28 out=15 tot=43
+# phase is ---- 0100
+# ESPRESSO  	Time was 0.00 sec, cost is c=10(0) in=28 out=15 tot=43
+# phase is ---- 0101
+# ESPRESSO  	Time was 0.00 sec, cost is c=10(0) in=28 out=16 tot=44
+# phase is ---- 0110
+# ESPRESSO  	Time was 0.00 sec, cost is c=9(0) in=26 out=17 tot=43
+# phase is ---- 0111
+# ESPRESSO  	Time was 0.00 sec, cost is c=9(0) in=25 out=17 tot=42
+# phase is ---- 1000
+# ESPRESSO  	Time was 0.00 sec, cost is c=9(0) in=25 out=15 tot=40
+# phase is ---- 1001
+# ESPRESSO  	Time was 0.00 sec, cost is c=10(0) in=26 out=14 tot=40
+# phase is ---- 1010
+# ESPRESSO  	Time was 0.00 sec, cost is c=10(0) in=25 out=14 tot=39
+# phase is ---- 1011
+# ESPRESSO  	Time was 0.00 sec, cost is c=9(0) in=24 out=15 tot=39
+# phase is ---- 1100
+# ESPRESSO  	Time was 0.00 sec, cost is c=9(0) in=25 out=17 tot=42
+# phase is ---- 1101
+# ESPRESSO  	Time was 0.00 sec, cost is c=10(0) in=27 out=15 tot=42
+# phase is ---- 1110
+# ESPRESSO  	Time was 0.00 sec, cost is c=11(0) in=29 out=16 tot=45
+# phase is ---- 1111
+# ESPRESSO  	Time was 0.00 sec, cost is c=10(0) in=26 out=15 tot=41
+# opoall	Time was 0.00 sec, cost is c=9(0) in=26 out=17 tot=43
+.i 4
+.o 4
+#.phase 0110
+.p 9
+11-0 0001
+10-0 1010
+0111 1101
+00-1 1100
+0-10 0110
+-100 0110
+0-0- 0001
+-1-1 0010
+1-01 1101
+.e
+arzirk@lx17:~> espresso
+.i 4
+.o 4
+0000 1-00
+0001 01-0
+0010 11-1
+0011 0-01
+0100 1110
+0101 1010
+0110 -111
+0111 01-0
+1000 0011
+1001 -10-
+1010 -0-1
+1011 1001
+1100 11-0
+1101 0-10
+1110 -000
+1111 1011^C
+arzirk@lx17:~> espresso
+.i 4
+.o 4
+.phase 1011
+0000 1-00
+0001 01-0
+0010 11-1
+0011 0-01
+0100 1110
+0101 1010
+0110 -111
+0111 01-0
+1000 0011
+1001 -10-
+1010 -0-1
+1011 1001
+1100 11-0
+1101 0-10
+1110 -000
+1111 1011
+.e
+.i 4
+.o 4
+#.phase 1011
+.p 9
+0101 1100
+1-11 0001
+-100 1010
+-1-1 0010
+-01- 0001
+0-10 0011
+0--0 1000
+10-0 0111
+1-1- 1100
+.e
+arzirk@lx17:~> 
+
+
+
+
