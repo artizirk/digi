@@ -30,9 +30,9 @@ espresso -o eqntott <<'EOF'
 .o 4
 .ob y1 y2 y3 y4
 .ilb x1 x2 x3 x4
-#.phase 0101
+.phase 0101
 #.phase 0000
-.phase 0111
+#.phase 0111
 0000 1000
 0001 0111
 0010 1--1

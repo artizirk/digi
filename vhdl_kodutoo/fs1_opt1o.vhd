@@ -11,32 +11,31 @@
 
 library IEEE; use IEEE.std_logic_1164.all;
 architecture opti of f_system is
-  signal x1i, x2i, x3i, x4i, y3a, y3a1, y3b, y3b1, y3b2: std_logic;
-  signal y4a, y4b, t8, t68i, t9i, t19, t197i: std_logic;
+  signal x1i, x2i, x3i, x4i, t1, t2, t3, t4, t5: std_logic;
+  signal t6, t7, t8, t9, t10, t11, t12: std_logic;
 begin
   x1i <= not x1;
   x2i <= not x2;
   x3i <= not x3;
   x4i <= not x4;
-  
-  y1 <= (x1 and x2i) nand ((x3i and x4) nand
-        (x1i and x2));
 
-  y2 <= (x2i and x4) or (x1i and x2);
+  t1 <= x1 and x2i;
+  t2 <= x3i and x4;
+  t3 <= x1i and x2;
+  y1 <= not (t1 or t2 or t3);
 
-  y3a <= (x1i and x3 and x4i) or
-       (x1 and x2 and x3) or
-       (x2 or x3 or x4);
+  t4 <= x2i and x4;
+  t5 <= x1i and x2;
+  y2 <= t4 or t5;
 
-  y3a1 <= (x1 nand x4) and x3;
-  y3a <= y3a1 nand
-       ((x1 and x2 and x3) or
-       (x2 nand (x3 nand x4)));
-  y3b1 <= x1 nand x3;
-  y3b <= y3b1 and x2 and x4;
-  y3 <= y3a nand y3b;
+  t6 <= x1i and x2 and x3i and x4;
+  t7 <= x1i and x3 and x4i;
+  t8 <= x1 and x2 and x3;
+  t9 <= x2i and x3i and x4i;
+  y3 <= not (t6 or t7 or t8 or t9);
 
-  y4a <= x3 nand x4;
-  y4 <= (x1 and x2 and y4a) or 
-        (x1i and x3) or (x2i and x4); 
+  t10 <= x1 and x2 and x3i and x4i;
+  t11 <= x1i and x3;
+  t12 <= x2i and x4;
+  y4 <= t10 or t11 or t12;
 end architecture opti;
