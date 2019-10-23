@@ -21,10 +21,9 @@ begin
 
   l1 <= x1 and x2;
 
-  t1 <= x1 nand x2i;
+  t1 <= not (x1 xor x2);
   t2 <= x3i nand x4;
-  t3 <= x1i nand x2;
-  y1 <= t1 and t2 and t3;
+  y1 <= t1 and t2;
 
   t4 <= x2i nand x4;
   t5 <= x1i nand x2;
