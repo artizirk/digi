@@ -1,4 +1,5 @@
 #!/bin/bash
+
 function never() {
 espresso -Dopoall <<'EOF'
 .i 4
@@ -22,17 +23,24 @@ espresso -Dopoall <<'EOF'
 .e
 EOF
 }
+
 never
+#exit 0
+
 echo '=========================='
-espresso -o eqntott <<'EOF'
-#espresso <<'EOF'
+PHASE=0101
+#PHASE=1000
+#PHASE=0000
+#PHASE=0111
+for PHASE in 0000 0001 0010 0011 0100 0101 0110 0111 1000 1001 1010 1011 1100 1101 1110 1111; do
+espresso -o eqntott <<EOF
+#espresso <<EOF
 .i 4
 .o 4
 .ob y1 y2 y3 y4
 .ilb x1 x2 x3 x4
-.phase 0101
-#.phase 0000
-#.phase 0111
+.phase $PHASE
+#phase $PHASE
 0000 1000
 0001 0111
 0010 1--1
@@ -51,3 +59,4 @@ espresso -o eqntott <<'EOF'
 1111 -000
 .e
 EOF
+done
