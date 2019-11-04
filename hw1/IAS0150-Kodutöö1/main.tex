@@ -1,0 +1,142 @@
+%
+% TTÜ Style Thesis template for LaTeX
+%
+% Public Version 1.1
+% 2019 Adjusted by Frank Korving for his TTÜ Bachelor Thesis, with contributions from Sander Arnus
+%
+% Public version 1.0
+% 2010 - 2013 Thijs Nugteren and Joos Buijs for TU/e Master Thesis
+%
+% THIS IS THE MAIN FILE (i.e. compile this file, compiling the others directly won't work)
+%
+\documentclass[12pt, a4paper]{report}
+
+% all the other includes etc. are done in the thesis.sty file.
+\usepackage{thesis}
+\usepackage{multicol}
+
+%
+% These commands need to be defined in order to produce a correct and personalized document
+%
+\newcommand{\doctitle}{Loogikafunktsioonide süsteem}
+\newcommand{\docsubtitle}{Kodutöö 1}
+
+\newcommand{\me}{Arti Zirk}
+\newcommand{\studentcode}{176119IDDR}
+\newcommand{\university}{TALLINNA TEHNIKAÜLIKOOL}
+\newcommand{\school}{INFOTEHNOLOOGIA TEADUSKOND}
+\newcommand{\department}{IT SÜSTEEMIDE ARENDUS}
+
+\newcommand{\supervisor}{Main Supervisor Name}
+\newcommand{\supervisortitle}{PhD}
+\newcommand{\cosupervisor}{Secondary Supervisor Name}
+\newcommand{\cosupervisortitle}{MsC}
+\newcommand{\keywords}{Important, comma, separated, keywords, applicable, to, your, thesis}
+\newcommand{\version}{1.0 version}
+\newcommand{\monthYear}{Oktoober 2019}
+\newcommand{\Year}{2019}
+\newcommand{\signatureDate}{Oktoober 31, 2019}
+
+\author{\me}
+
+%
+% PDF settings
+%
+\hypersetup {
+    pdfauthor={\me},
+    pdfsubject={\doctitle},
+    pdfkeywords={\keywords}
+}
+
+\begin{document}
+\pagenumbering{roman}
+\include{titlepage}
+
+\normalsize
+
+\chapter*{\centerline{Autorideklaratsioon}}\label{chapter:declaration}
+\input{chapters/authordeclaration.tex}
+
+%\chapter*{\centerline{Annotatsioon}}\label{chapter:abstract-eesti}
+%\input{chapters/abstract-eesti.tex}
+\pagebreak
+
+%\chapter*{\centerline{Abstract}}\label{chapter:abstract}
+%\input{chapters/abstract}
+%\pagebreak
+
+%\chapter*{\centerline{List of abbreviations and terms}}\label{chapter:terms}
+%\input{chapters/terms_abbreviations.tex}
+%\pagebreak
+
+\phantomsection
+\setcounter{tocdepth}{2}    % Sets maximum depth of Table Of Contents
+\renewcommand{\contentsname}{Sisukord}
+\tableofcontents
+
+%\clearpage \phantomsection
+%\setcounter{figure}{0}
+%\addcontentsline{toc}{chapter}{\listfigurename}
+%\listoffigures
+
+%\clearpage \phantomsection
+%\addcontentsline{toc}{chapter}{\listtablename}
+%\listoftables
+
+\chapter{Lähteülesande genereerimine}\label{chapter:lähteülesanne}
+\setcounter{page}{0}
+%from here on, start the 'real' page numbering, from 1, with normal digits
+\pagenumbering{arabic}
+\input{chapters/lahteulesanne.tex}
+
+\chapter{Minimeerimine}\label{chapter:minimeerimine}
+\input{chapters/minimeerimine.tex}
+
+\chapter{Minimeerimine}\label{chapter:loogikaskeem}
+\input{chapters/loogikaskeem.tex}
+
+\chapter{Modeleerimine}\label{chapter:modeleerimine}
+\input{chapters/modeleerimine.tex}
+
+%\chapter{Introduction}\label{chapter:introduction}
+%\input{chapters/introduction}
+
+%\chapter{First Chapter}\label{chapter:first_chapter}
+%\input{chapters/first_chapter.tex}
+
+%\chapter{Second Chapter}\label{chapter:second_chapter}
+%\input{chapters/second_chapter.tex}
+
+%\chapter{Summary}\label{chapter:summary} 
+%\input{chapters/summary.tex}
+
+%\pagebreak
+%\phantomsection
+%\addcontentsline{toc}{chapter}{Bibliography}
+%\printbibliography
+
+\pagebreak
+\phantomsection
+\appendix
+\addcontentsline{toc}{chapter}{Lisad}
+\chapter*{Lisad}
+\renewcommand{\thechapter}{\arabic{chapter}}
+
+\addcontentsline{toc}{chapter}{Lisa 1 - espresso -Dopoall}
+\label{appendix:espresso:dopoall}
+{\let\clearpage\relax\chapter*{Lisa 1 - espresso -Dopoall}}
+\input{appendices/espresso_dopoall.tex}
+
+\addcontentsline{toc}{chapter}{Lisa 2 - VHDL kood}
+\label{appendix:vhdl}
+{\let\clearpage\relax\chapter*{Lisa 1 - VHDL kood}}
+\input{appendices/vhdl.tex}
+
+%\clearpage
+%\phantomsection
+%\addcontentsline{toc}{chapter}{Lisa 2 - Something Else}
+%\label{chapter:appendix-something-else}
+%\chapter*{Appendix 2 - Something Else}
+%\input{appendices/appendix-something-else.tex}
+
+\end{document}

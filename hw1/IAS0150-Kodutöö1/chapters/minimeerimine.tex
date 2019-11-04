@@ -1,0 +1,54 @@
+Minimeerimine on tehtud programmi \verb|espresso|\footnote{\url{https://github.com/classabbyamp/espresso-logic}} abil. Sisendiks on tabelis \ref{table:2} toodud tõeväärtus tabel.
+Argumendi \verb|-Dopoall| kasutamisel olen välja valinud kaks huvitavamat lahendust erinevate faasidega.
+
+Kodutöö ülesande kirjelduses on öeldud, et tuleks optimeerida pindala ning kiirust. Lisaks on piiratud, et loogika elementidel saab olla kuni 3 sisendit.
+Ehk siis \verb|espresso| \verb|-Dopoall| väljundis on tähtis jälgida implikantide arvu (c) ning sisendite ja väljundite koguarvu (tot).
+
+\begin{lstlisting}[
+    basicstyle=\ttfamily\footnotesize,
+    caption=-Dopoall faas 0000,
+]
+# phase is ---- 0000
+# ESPRESSO  	Time was 0.00 sec, cost is c=9(0) in=26 out=16 tot=42
+\end{lstlisting}
+
+Faasi 0000 implikantide arv on c=9, teiste faaside korral on see arv suurem.
+
+Kogu \verb|espresso -Dopoall| leiab lisade all olevast listingust nr\ref{espresso:dopoall}.
+
+\begin{lstlisting}[
+    basicstyle=\ttfamily\footnotesize,
+    caption=-o eqntott faas 0000,
+]
+y1 = (!x3&x4) | (!x1&x2) | (x1&!x2&!x4);
+y2 = (!x2&!x3&!x4) | (x1&x2&x4) | (x1&!x2&!x4) | (x1&x2&x3);
+y3 = (x2&x3&!x4) | (!x1&x2&!x3&x4) | (!x2&!x3&!x4) | (x1&x2&x3);
+y4 = (!x1&x2&!x3&x4) | (!x1&!x3&!x4) | (x1&x2&x4) | (x1&!x2&!x4) |
+     (x1&x2&x3);
+\end{lstlisting}
+
+Kui vaadata \verb|-eqntott| argumendi väljundit faaasi 0000 korral siis on näha, et meil tekib väga palju üle 3 sisendiga loogika elemente. Faasi 0000 valimine edasiseks optimeerimiseks ei oleks mõtekas.
+
+\begin{lstlisting}[
+    basicstyle=\ttfamily\footnotesize,
+    caption=-Dopoall faas 0101,
+]
+# phase is ---- 0101
+# ESPRESSO  	Time was 0.00 sec, cost is c=10(0) in=27 out=12 tot=39
+\end{lstlisting}
+
+Faasi 0101 korral on näha, et implikante on ühe võrra rohkem kuid kogu sisendite ja väljundite arv tot=39 mis on võrreldes teiste faasidega kõige väiksem.
+
+\begin{lstlisting}[
+    basicstyle=\ttfamily\footnotesize,
+    caption=-o eqntott faas 0101,
+]
+y1 = (x1&!x2) | (!x3&x4) | (!x1&x2);
+y2 = (!x2&x4) | (!x1&x2);
+y3 = (!x1&x2&!x3&x4) | (!x1&x3&!x4) | (x1&x2&x3) | (!x2&!x3&!x4);
+y4 = (x1&x2&!x3&!x4) | (!x1&x3) | (!x2&x4);
+\end{lstlisting}
+
+Vaadates \verb|-eqntott| argumendiga saadud tulemust näeme, et üle 3 sisendiga loogika elemente on siin ka üsna vähe.
+
+Edasiseks optimeerimiseks võtame aluseks faasi 0101.

@@ -1,0 +1,211 @@
+\begin{lstlisting}[
+    basicstyle=\ttfamily\footnotesize,
+    caption=f\_system.vhd
+]
+library IEEE; use IEEE.std_logic_1164.all;
+entity f_system is
+  port ( x1, x2, x3, x4: in std_logic;
+         y1, y2, y3, y4: out std_logic );
+end entity f_system;
+\end{lstlisting}
+
+\begin{lstlisting}[
+    basicstyle=\ttfamily\footnotesize,
+    caption=fs1\_table.vhd
+]
+-------------------------------------
+-- IAY0150 - Homework #1. Truth table
+-------------------------------------
+-- (C) Arti Zirk - 2019 - Tallinn
+-------------------------------------
+
+library IEEE; use IEEE.std_logic_1164.all;
+architecture tabel of f_system is
+begin
+  process (x1, x2, x3, x4)
+    variable in_word, out_word: std_logic_vector (3 downto 0);
+  begin
+    in_word := x1 & x2 & x3 & x4;
+    case  in_word  is
+      when "0000" => out_word := "1000";
+      when "0001" => out_word := "0111";
+      when "0010" => out_word := "1--1";
+      when "0011" => out_word := "11-1";
+      when "0100" => out_word := "0110";
+      when "0101" => out_word := "-100";
+      when "0110" => out_word := "--0-";
+      when "0111" => out_word := "0111";
+      when "1000" => out_word := "0-00";
+      when "1001" => out_word := "011-";
+      when "1010" => out_word := "-010";
+      when "1011" => out_word := "-11-";
+      when "1100" => out_word := "1--1";
+      when "1101" => out_word := "0010";
+      when "1110" => out_word := "1000";
+      when "1111" => out_word := "-000";
+      when others => out_word := "----";
+    end case;
+    y1 <= out_word(3);    y2 <= out_word(2);
+    y3 <= out_word(1);    y4 <= out_word(0);
+  end process;
+end architecture tabel;
+\end{lstlisting}
+
+\begin{lstlisting}[
+    basicstyle=\ttfamily\footnotesize,
+    caption=fs1\_espr.vhd
+]
+-----------------------------------------
+-- IAY0150 - Homework #1. Espresso result
+-----------------------------------------
+-- (C) Arti Zirk - 2019 - Tallinn
+-----------------------------------------
+
+library IEEE; use IEEE.std_logic_1164.all;
+architecture espresso of f_system is
+begin
+  y1 <= not ((x1 and not x2) or (not x3 and x4) or
+        (not x1 and x2));
+
+  y2 <= (not x2 and x4) or  (not x1 and x2);
+
+  y3 <= not ((not x1 and x2 and not x3 and x4) or 
+       (not x1 and x3 and not x4) or
+       (x1 and x2 and x3) or
+       (not x2 and not x3 and not x4));
+
+  y4 <= (x1 and x2 and not x3 and not x4) or
+        (not x1 and x3) or (not x2 and x4);
+end architecture espresso;
+\end{lstlisting}
+
+\begin{lstlisting}[
+    basicstyle=\ttfamily\footnotesize,
+    caption=fs1\_opt1o.vhd,
+    label=fs1opt10
+]
+-----------------------------------------
+-- IAY0150 - Homework #1.
+-----------------------------------------
+-- (C) Arti Zirk - 2019 - Tallinn
+-----------------------------------------
+
+library IEEE; use IEEE.std_logic_1164.all;
+architecture opti1 of f_system is
+  signal x1i, x2i, x3i, x4i, y31, y4i, t1: std_logic;
+  signal t6, t7, t8, t9, t10, t11, t12: std_logic;
+  signal t2, t3, t4, t5, l1, t13, t61, t62, t71: std_logic;
+begin
+  x1i <= not x1;
+  x2i <= not x2;
+  x3i <= not x3;
+  x4i <= not x4;
+
+  l1 <= x1 and x2;
+
+  t1 <= not (x1 xor x2);
+  t2 <= x3i nand x4;
+  y1 <= t1 and t2;
+
+  t4 <= x2i nand x4;
+  t5 <= x1i nand x2;
+  y2 <= t4 nand t5;
+
+  t61 <= x1 nor x3;
+  t62 <= x2 and x4;
+  t6  <= t61 nand t62;
+  t71 <= x1 nor x4;
+  t7 <= t71 nand x3;
+  t8 <= l1 nand x3;
+  t9 <= x2 or x3 or x4;
+  y31 <= t6 and t7 and t8;
+  y3 <= y31 and t9;
+
+  t13 <= x3 nor x4;
+  t10 <= l1 nand t13;
+  t11 <= x1i nand x3;
+  t12 <= x2i nand x4;
+  y4i <= t10 and t11 and t12;
+  y4 <= not y4i;
+end architecture opti1;
+\end{lstlisting}
+
+
+\begin{lstlisting}[
+    basicstyle=\ttfamily\footnotesize,
+    caption=fs1\_test.vhd
+]
+------------------------------------------------------------------------
+-- IAY0150 - Homework #1. Test bench for the example task.
+------------------------------------------------------------------------
+-- (C) Peeter Ellervee - 2016 - Tallinn
+------------------------------------------------------------------------
+library IEEE; use IEEE.std_logic_1164.all;
+entity test is
+end entity test;
+
+library IEEE; use IEEE.std_logic_1164.all;
+architecture bench of test is
+  signal x1, x2, x3, x4: std_logic;
+  signal y1a, y1b, y1c, y2a, y2b, y2c: std_logic;
+  signal y3a, y3b, y3c, y4a, y4b, y4c: std_logic;
+  signal y1x, y2x, y3x, y4x: std_logic;
+  component f_system
+    port ( x1, x2, x3, x4: in std_logic;
+           y1, y2, y3, y4: out std_logic );
+  end component;
+  for U1: f_system use entity work.f_system(tabel);
+  for U2: f_system use entity work.f_system(espresso);
+  for U3: f_system use entity work.f_system(opti1);
+
+  function compare_signals (s1, s2, s3: std_logic) return std_logic is
+  begin
+    if  s1='-'  then
+      if  s2/=s3  then  return 'X';  end if;
+    else
+      if  s1/=s2 or s1/=s3  then  return 'X';  end if;
+    end if;
+    return '0';
+  end function compare_signals;
+begin
+  -- Input signals (after every 10 ns)
+  x1 <= '0' after 0 ns, '1' after 80 ns, '0' after 160 ns;
+  x2 <= '0' after 0 ns, '1' after 40 ns, '0' after 80 ns, '1' after 120 ns;
+  x3 <= '0' after 0 ns, '1' after 20 ns, '0' after 40 ns, '1' after 60 ns,
+        '0' after 80 ns, '1' after 100 ns, '0' after 120 ns, '1' after 140 ns;
+  x4 <= '0' after 0 ns, '1' after 10 ns, '0' after 20 ns, '1' after 30 ns,
+        '0' after 40 ns, '1' after 50 ns, '0' after 60 ns, '1' after 70 ns,
+        '0' after 80 ns, '1' after 90 ns, '0' after 100 ns, '1' after 110 ns,
+        '0' after 120 ns, '1' after 130 ns, '0' after 140 ns, '1' after 150 ns;
+
+  -- System of Boolean functions
+  U1: f_system port map (x1, x2, x3, x4, y1a, y2a, y3a, y4a);
+  U2: f_system port map (x1, x2, x3, x4, y1b, y2b, y3b, y4b);
+  U3: f_system port map (x1, x2, x3, x4, y1c, y2c, y3c, y4c);
+  --y1c<=y1b;  y2c<=y2b;  y3c<=y3b;  y4c<=y4b;
+  y1x <= compare_signals (y1a, y1b, y1c);
+  y2x <= compare_signals (y2a, y2b, y2c);
+  y3x <= compare_signals (y3a, y3b, y3c);
+  y4x <= compare_signals (y4a, y4b, y4c);
+end architecture bench;
+\end{lstlisting}
+
+
+\begin{lstlisting}[
+    basicstyle=\ttfamily\footnotesize,
+    caption=make.sh
+]
+#!/bin/bash
+set -x -e
+
+# uses ghdl-mcode variant
+# import vhd files
+ghdl -i -g *.vhd
+# make unit
+ghdl -m test
+# run unit and export logic graph
+ghdl -r test --wave=test.ghw --stop-time=200ns
+
+# send signal to gtkwave to reload open file
+gsettings set com.geda.gtkwave reload 0
+\end{lstlisting}

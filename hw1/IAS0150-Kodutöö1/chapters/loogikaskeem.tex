@@ -1,0 +1,195 @@
+\section{Esialgne funktsioonide süsteemi skeem}
+Kirjutatakse välja esialgne skeem ilma elementide sisendite piiranguta ning see järel
+natuke lahti kirjutades vastavalt ülesande 3 sisendiga loogikaelementide piirangule.
+
+\newcommand\bnot[1]{\mathop{\overline{#1}}}
+\newcommand\nand[0]{\bnot{\wedge}}
+\newcommand\nor[0]{\bnot{\vee}}
+
+\begin{multicols}{2}
+\(\begin{array}{l}
+t_1 = x_1 \bnot{x_2} \\
+t_2 = \bnot{x_3 } x_4 \\
+t_3 = \bnot{x_1} x_2 \\
+t_4 = \bnot{x_2} x_4 \\
+t_5 = \bnot{x_1} x_2 \\
+t_6 = \bnot{x_1} x_2 \bnot{x_3} x_4 \\
+t_7 = \bnot{x_1} x_3 \bnot{x_4} \\ 
+t_8 = x_1 x_2 x_3 \\
+t_9 = \bnot{x_2} \bnot{x_3} \bnot{x_4} \\
+t_{10} = x_1 x_2 \bnot{x_3} \bnot{x_4} \\
+t_{11} = \bnot{x_1} x_3 \\
+t_{12} = \bnot{x_2} x_4 \\
+y_1 = \bnot{t_1 | t_2 | t_3} \\
+y_2 = t_4 | t_5 \\ 
+y_3 = \bnot{t_6 | t_7 | t_8 | t_9} \\
+y_4 = t_{10} | t_{11} | t_{12} \\
+\end{array}\)
+
+\columnbreak
+
+\(\begin{array}{l r}
+t_1 = x_1 \bnot{x_2} \\
+t_2 = \bnot{x_3} x_4 \\
+t_3 = \bnot{x_1} x_2 & [=t_5]\\
+t_4 = \bnot{x_2} x_4 \\
+t_5 = \bnot{x_1} x_2 & [=t_3]\\
+{\color{red}t_{61} = \bnot{x_1} \bnot{x_3}} \\
+t_6 = {\color{red}t_{61}} x_2 x_4 \\
+t_7 = \bnot{x_1} x_3 \bnot{x_4} \\ 
+t_8 = x_1 x_2 x_3 & [= {\color{red}t_{101}} x_3]\\
+t_9 = \bnot{x_2} \bnot{x_3} \bnot{x_4} \\
+{\color{red}t_{101} = x_1 x_2} \\
+t_{10} = {\color{red}t_{101}} \bnot{x_3} \bnot{x_4} \\
+t_{11} = \bnot{x_1} x_3 \\
+t_{12} = \bnot{x_2} x_4 \\
+y_1 = \bnot{t_1 | t_2 | t_3} \\
+y_2 = t_4 | t_5 \\ 
+{\color{red}y_{31} = t_6 | t_7} \\
+y_3 = \bnot{{\color{red}y_{31}} | t_8 | t_9} \\
+y_4 = t_{10} | t_{11} | t_{12} \\
+\end{array}\)
+\end{multicols}
+
+\section{Pindala ja viite analüüs}
+Järgmisena analüüsitakse loogikafunktsioonide süsteemi pindala ja viidet.
+Viite parameetrid on võetud koduse ülesande lehelt ning on toodud
+tabelis \ref{table:logic_elements}.
+
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Element & Suurus & Viide \\
+\hline
+2-NAND & 1.0 & 1.0 \\
+\hline
+bnot & 1.5 & 1.5 \\ 
+2-NOR & 1.5 & 1.5 \\
+3-NAND & 1.5 & 1.5 \\
+\hline
+2-OR & 2.0 & 2.0 \\
+2-AND & 2.0 & 2.0 \\
+2-XOR & 2.0 & 2.0 \\
+3-NOR & 2.0 & 2.0 \\
+\hline
+3-OR & 2.5 & 2.5 \\
+3-AND & 2.5 & 2.5 \\
+3-XOR & 2.5 & 2.5 \\
+\hline
+\end{tabular}
+\caption{Loogika elementide suurused ja viited}
+\label{table:logic_elements}
+\end{table}
+
+\pagebreak
+
+Implikantide järel on välja toodud realiseeritava loogika elemendi pindala/viide ning kogu viide.
+
+\(\begin{array}{l r r}
+x_{1i} = \bnot{x_1} & [1.5/1.5] & 1.5\\
+x_{2i} = \bnot{x_2} & [1.5/1.5] & 1.5 \\
+x_{3i} = \bnot{x_3} & [1.5/1.5] & 1.5 \\
+x_{4i} = \bnot{x_4} & [1.5/1.5] & 1.5 \\
+
+c_1 = x_{1i} x_2  & [2.0/2.0] & 1.5+2.0=3.5\\
+c_2 = x_1 x_2 & [2.0/2.0] & 2.0\\ 
+
+t_1 = x_1 x_{2i} & [2.0/2.0] & 1.5+2.0=3.5\\
+t_2 = x_{3i} x_4 & [2.0/2.0] & 1.5+2.0=3.5\\
+t_4 = x_{2i} x_4 & [2.0/2.0] & 1.5+2.0=3.5\\
+t_{61} = x_{1i} x_{3i} & [2.0/2.0] & 1.5+2.0=3.5\\
+t_6 = t_{61} x_2 x_4 & [2.5/2.5] & 3.5+2.5=6.0\\
+t_7 = x_{1i} x_3 x_{4i} & [2.5/2.5] & 1.5+2.5=3.5\\ 
+t_8 = c_2 x_3 & [2.0/2.0] & 2.0+2.0=4.0\\
+t_9 = x_{2i} x_{3i} x_{4i} & [2.5/2.5] & 1.5+2.5=3.5 \\
+t_{10} = c_2 x_{3i} x_{4i} & [2.5/2.5] & 2.0+2.5=4.5\\
+t_{11} = x_{1i} x_3 & [2.0/2.0] & 1.5+2.0=3.5\\
+t_{12} = x_{2i} x_4 & [2.0/2.0] & 1.5+2.0=3.5 \\
+%\end{array}\)
+%\(\begin{array}{l r r}
+y_{1i} = t_1 | t_2 | c_1 & [2.5/2.5] & 3.5+2.5=6.0 \\
+y_1 = \bnot{y_{1i}} & [1.5/1.5] & 6.0+1.5=7.5 \\
+y_2 = t_4 | c_1 & [2.0/2.0] & 3.5+2.0=5.5\\ 
+y_{31} = t_6 | t_7 & [2.0/2.0] & 6.0+2.0=8.0\\
+y_{3i} = y_{31} | t_8 | t_9 & [2.5/2.5] & 8.0+2.5=10.5 \\
+y_3 = \bnot{y_{3i}} & [1.5/1.5] & 10.5+1.5=12.0\\
+y_4 = t_{10} | t_{11} | t_{12} & [2.5/2.5] & 4.5+2.5=7.0\\
+\end{array}\)
+
+Elemendid: 6 x NOT, 9 x 2-AND, 4 x 3-AND, 2 x 2-OR, 3 x 3-OR.
+
+Kokku: 24 elementi, suurus 46, kriitiline tee 12.
+
+\section{Ühiste alamavaldiste otsimine}
+
+\(\begin{array}{l r}
+y_1 = (x_1 \bnot{x_2}) | (\bnot{x_3} x_4) | (\bnot{x_1} x_2)\\
+/(\bnot{x_3} x_4) \rightarrow (x_1 \bnot{x_2}) |  (\bnot{x_1} x_2) & = x_1  \oplus  x_2 \\ 
+\end{array}\)
+
+\(\begin{array}{l r}
+y_2 = (\bnot{x_2} x_4) | (\bnot{x_1} x_ 2)
+\end{array}\)
+
+\(\begin{array}{l r}
+y_3 = (\bnot{x_1} x_2 \bnot{x_3} x_4) | (\bnot{x_1} x_3 \bnot{x_4}) |
+    (x_1 x_2 x_3) | (\bnot{x_2} \bnot{x_3} \bnot{x_4}) \\
+/\bnot{x_1} \rightarrow (x_2 \bnot{x_3} x_4) | (x_3 \bnot{x_4}) \\
+/x_2 \rightarrow (\bnot{x_1} \bnot{x_3} x_4) | (x_1 x_3) \\
+/\bnot{x_2} \rightarrow (\bnot{x_3} \bnot{x_4}) & (\bnot{x_3} \bnot{x_4}) = c_1 \\
+/x_3 \rightarrow (\bnot{x_1} \bnot{x_4}) | (x_1 x_2) & (x_1 x_2) = c_2\\
+/\bnot{x_3} \rightarrow (\bnot{x_1} x_2 x_4) | (\bnot{x_2} \bnot{x_4})\\
+/\bnot{x_4} \rightarrow (\bnot{x_1} x_3) | (\bnot{x_2} \bnot{x_3})
+
+\end{array}\)
+
+\(\begin{array}{l r}
+y_4 = (x_1 x_2 \bnot{x_3} \bnot{x_4}) | (\bnot{x_1} x_3) | (\bnot{x_2} x_4) \\
+/(x_1 x_2) \rightarrow (\bnot{x_3} \bnot{x_4}) & = c_1 \\
+/(\bnot{x_3} \bnot{x_4}) \rightarrow (x_1 x_2) & = c_2 \\
+\end{array}\)
+
+Suur enamus optimeeringuid on leitud intuitiivselt ning pole siin eraldi välja toodud.
+
+\section{Optimeeritud pindala ja viite analüüs}
+
+\(\begin{array}{l r r}
+x_{1i} = \bnot{x_1} & [1.5/1.5] & 1.5\\
+x_{2i} = \bnot{x_2} & [1.5/1.5] & 1.5 \\
+x_{3i} = \bnot{x_3} & [1.5/1.5] & 1.5 \\
+x_{4i} = \bnot{x_4} & [1.5/1.5] & 1.5 \\
+\\
+c_1 = x_1 x_2 & [2.0/2.0] & 2.0\\ 
+\\
+t_1 = x_1  \oplus  x_2 & [2.0/2.0] & 2.0\\
+t_2 = x_{3i} \nand x_4 & [1.0/1.0] & 1.5+1.0=2.5\\
+y_1 =  t_1  t_2 & [2.0/2.0] & 2.5+2.0=4.5 \\
+\\
+t_3 = x_{2i} \nand x_4 & [1.0/1.0] & 1.5+1.0=2.5\\
+t_4 = x_{1i} \nand x_2 & [1.0/1.0] & 1.5+1.0=2.5\\
+y_2 = t_3 \nand t_4 & [1.0/1.0] & 2.5+2.0=4.5 \\
+\\
+t_{51} = x_1 \oplus x_3 & [2.0/2.0] & 2.0\\
+t_{52} = x_2 x_4 & [2.0/2.0] & 2.0\\
+t_5 = t_{51} \nand t_{52} & [1.0/1.0] & 2.0+1.0=3.0\\
+t_{61} = x_1 \nor x_4 & [1.5/1.5] & 1.5\\
+t_6 = t_{61} \nand x_3 & [1.0/1.0] & 1.5+1.0=2.5 \\
+t_7 = c_1 \nand x_3 & [1.0/1.0] & 2.0+1.0=3.0\\
+t_8 = x_2 | x_3 | x_4 & [2.5/2.5] & 2.5\\
+y_{31} = t_7  t_8 & [2.0/2.0] & 3.0+2.0 = 5.0\\
+y_3 = t_5 t_6 y_{31} & [2.0/2.0] & 5.0+2.0=7.0\\
+\\
+t_9 = x_3 \nor x_4 & [1.5/1.5] & 1.5\\
+t_{10} = c_1 \nand t_9 & [2.0/2.0] & 2.0+2.0=4.0 \\
+t_{11} = x_{1i} \nand x_3 & [1.0/1.0] & 1.5+1.0=2.5 \\
+t_{12} = x_{2i} \nand x_4 & [1.0/1.0] & 1.5+1.0=2.5\\ 
+y_{4i} = t_{10}  t_{11}  t_{12} & [2.5/2.5] & 4.0+2.5=6.5 \\
+y_4 = \bnot{y_{4i}} & [1.5/1.5] & 6.5+1.5=8.0\\
+\end{array}\)
+
+Elemendid: 5 x NOT, 4 x 2-AND, 2 x 3-AND, 1 x 3-OR, 10 x 2-NAND, 
+
+Kokku: 22 (-2) elementi, suurus 33 (-13), kriitiline tee 8 (-4).
+
+Optimeeritud loogikasüsteemil on väiksem pindala, väiksem voolu tarve ning on kiirem.
