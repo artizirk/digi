@@ -1,10 +1,10 @@
 #!/bin/bash
 set -x -e
 # import vhd files
-ghdl -i -g *.vhd
+ghdl -a -g --ieee=synopsys *.vhd
 # make unit
-ghdl -m test
+ghdl -m --ieee=synopsys test
 # run unit and export logic graph
-ghdl -r test --wave=test.ghw --stop-time=200ns
+ghdl -r --ieee=synopsys test --wave=test.ghw --stop-time=1us
 # send signal to gtkwave to reload open file
 gsettings set com.geda.gtkwave reload 0
