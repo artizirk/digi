@@ -12,7 +12,7 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.std_logic_arith.all;
 
-entity gcd is 
+entity gcd is
   port (xi, yi : in unsigned(15 downto 0);
         rst    : in bit;
         xo     : out unsigned(15 downto 0);
@@ -24,8 +24,8 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.std_logic_arith.all;
 
-architecture experiments of gcd is 
-begin 
+architecture experiments of gcd is
+begin
 
   process
     variable x, y: unsigned(15 downto 0);
