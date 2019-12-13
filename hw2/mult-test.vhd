@@ -29,9 +29,9 @@ begin
   U1: mult port map (x, y, rst, res, rdy, clk);
 
   process
-    type int_array is array (0 to 8) of integer;
-    constant a: int_array := (1, 2, 1, 3, -26, 24,  2, 10, 52);
-    constant b: int_array := (1, 1, 2, 4, 15,  -9,  2, 10,  6);
+    type int_array is array (0 to 9) of integer;
+    constant a: int_array := (-1, 1, -1, 1, 2, 1, 3, -26, 24, 100);
+    constant b: int_array := (1, -1, -1, 1, 1, 2, 4, 15,  -9, 100);
     --       results (mult) 16 -390, -216, 4, 100, 312
   begin
     wait on clk until clk='0';
