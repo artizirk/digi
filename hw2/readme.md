@@ -47,3 +47,15 @@ Rebuild everything on vhdl file change
 ```
 while true; do inotifywait -e modify *.vhd; ./make.sh; done
 ```
+
+## PlantUML graphs
+
+PNG output
+```
+java -jar ~/Allalaadimised/plantuml.jar mult.plantuml
+```
+
+LaTeX TikZ output
+```
+java -jar ~/Allalaadimised/plantuml.jar -tlatex:nopreamble mult.plantuml
+```

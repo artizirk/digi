@@ -1,0 +1,32 @@
+@startuml
+
+start
+
+while (rst==1)
+    -> S_wait;
+endwhile (false)
+
+:x <= xi; y <= yi; \npre_overflow <= check(xi, yi); \no <= 0; rdy <= 0; bit_count <=10;;
+
+-> S_start;
+while (bit_count!=0)
+    -> S_add;
+    if (y(0)?) then (1)
+        :o <= o + x;
+    else (0)
+    endif
+    -> S_shift;
+    :x <<= 1; y >>=1; bit_count--;;
+endwhile
+
+-> S_correct;
+if (y(0)?) then (1)
+    :o <= o - x;
+else (0)
+endif
+-> S_ready;
+:xo <= o(9 downto 0); \noverflow <= pre_overflow or (o(11) xor o(10));\nrdy <= 1;;
+
+stop;
+
+@enduml
