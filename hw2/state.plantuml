@@ -1,0 +1,28 @@
+@startuml
+[*] --> S_wait
+S_wait:<xy_ld_xyi;\n\
+<o_lx_0; \n\
+<bit_count_lx_10;
+
+S_wait --> S_start
+S_start: >bit_count_is_zero?;
+
+S_start --> S_add
+S_add: >y_bit_0?;\n<add_ox;
+
+S_add --> S_shift
+S_shift: <o_ld_sum;\n\
+<x_shift_left_1;\n\
+<y_shift_right_1;\n\
+<bit_count_dec_1;
+
+S_shift --> S_start
+S_start --> S_correct
+S_correct: >y_bit_0?;\n\
+<sub_ox;
+
+S_correct --> S_ready
+S_ready: <o_ld_sub;\n\
+<xo_ld_o;
+S_ready --> [*]
+@enduml

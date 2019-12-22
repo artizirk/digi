@@ -1,0 +1,44 @@
+@startuml
+object bit_count {
+    >lx_10
+    >dec_1
+    <is_zero
+}
+
+object "xi(9 downto 0)" as xi
+object "yi(9 downto 0)" as yi
+object "xo(9 downto 0)" as xo
+
+object "x(10 downto 0)" as x {
+    >ld_xyi
+    >shift_left_1
+}
+object "y(10 downto 0)" as y {
+    >ld_yi
+    >shift_right_1
+    <bit_0
+}
+
+xi --> x : >xy_ld_xyi\nx(9 downto 0)(others=>xi(9))
+yi --> y : >xy_ld_xyi\ny(9 downto 0)(others=>yi(9))
+
+
+object sum
+object sub
+
+object "o(10 downto 0)" as o {
+    >lx_0
+}
+
+
+x --> sum : >add_ox
+o --> sum : >add_ox
+sum --> o : >o_ld_sum
+
+x --> sub : >sub_ox
+o --> sub : >sub_ox
+sub --> o : >o_ld_sub
+
+o --> xo : >xo_ld_o
+
+@enduml
